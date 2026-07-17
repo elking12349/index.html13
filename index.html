@@ -1,66 +1,49 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق الأرباح - Kingo</title>
-    <!-- استدعاء مكتبة تلجرام الرسمية -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <!-- 1. الصق كود الـ SDK اللي نسخته هنا بالأسفل (امسح السطر اللي تحت وحط الكود بتاعك) -->
-   <script src='//libtl.com/sdk.js' data-zone='11326679' data-sdk='show_11326679'></script>
-    <style>
-        body {
-            background-color: #0e1621;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .btn {
-            background-color: #31b545;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(49, 181, 69, 0.4);
-            margin-top: 50px;
-            width: 80%;
-        }
-        .btn:active {
-            transform: scale(0.98);
-        }
-    </style>
+    <title>تطبيق الأرباح</title>
+    
+    <!-- كود مونيتاج الرئيسي للإعلانات -->
+    <script src="https://alwingulla.com/88/tag.min.js" data-zone="11326679" async data-standalone="true"></script>
 </head>
-<body>
+<body style="background-color: #111; color: #fff; text-align: center; font-family: sans-serif; padding: 20px;">
 
-    <h2>اضغط لمشاهدة الإعلان وتجميع الأرباح 🤑</h2>
-    <p>بمجرد الضغط، سيفتح لك الإعلان. بعد الانتهاء من مشاهدته، سيتم إضافة 1 جنيه لرصيدك تلقائياً!</p>
-
-    <!-- زرار الإعلان -->
-    <button class="btn" id="adBtn">🎬 كسب 1 جنيه</button>
+    <h2>مرحباً بك في تطبيق الأرباح 🚀</h2>
+    <p>شاهد الإعلان بالكامل لتجميع النقاط وزيادة رصيدك</p>
+    
+    <!-- زرار تشغيل الإعلان -->
+    <button id="adBtn" style="padding: 15px 30px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px;">
+        📺 تشغيل الإعلان بمكافأة
+    </button>
 
     <script>
-        // تهيئة تطبيق التلجرام المصغر
-        const tg = window.Telegram.WebApp;
-        tg.expand(); // لفتح التطبيق بملء الشاشة
+        // 1. دالة لجلب الـ Telegram ID من رابط الصفحة تلقائياً
+        function getTelegramId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
 
-        const adButton = document.getElementById('adBtn');
+        const userId = getTelegramId();
+        console.log("تم لقط الـ Telegram ID بنجاح:", userId);
 
-        adButton.addEventListener('click', () => {
-            // تشغيل دالة الإعلان بمكافأة التابعة لـ Monetag
-            // تأكد أن الرقم 11326679 هو نفس الرقم الظاهر في الكود عندك بالصورة
-            show_11326679().then(() => {
-                // الكود الذي يتم تنفيذه بعد مشاهدة الإعلان بنجاح
-                tg.sendData("add_one_pound"); // إرسال رسالة للبوت لزيادة الرصيد
+        // 2. عند الضغط على الزرار، يتم تمرير الـ ID لمونيتاج وتشغيل الإعلان
+        document.getElementById('adBtn').addEventListener('click', () => {
+            if (!userId) {
+                alert("خطأ: لم يتم العثور على حساب التليجرام، افتح التطبيق من البوت مباشرة!");
+                return;
+            }
+
+            // تفعيل دالة مونيتاج وتمرير الـ ID في الـ var1 عشان يروح للـ Postback
+            show_11326679({ var1: userId }).then(() => {
+                alert('🎉 ممتاز! اكتمل الإعلان، انتظر ثواني لتحديث رصيدك في البوت.');
             }).catch((err) => {
-                console.error("خطأ في تشغيل الإعلان أو لم يكتمل:", err);
-                alert("يرجى مشاهدة الإعلان بالكامل للحصول على الجنيه!");
+                console.error("خطأ في تشغيل الإعلان:", err);
+                alert("برجاء المحاولة مرة أخرى أو تأكد من قفل مانع الإعلانات.");
             });
         });
     </script>
+
 </body>
 </html>
