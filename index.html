@@ -4,44 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق الأرباح</title>
-    
-    <!-- كود مونيتاج الرئيسي للإعلانات -->
+    <!-- كود مونيتاج الرئيسي -->
     <script src="https://alwingulla.com/88/tag.min.js" data-zone="11326679" async data-standalone="true"></script>
 </head>
 <body style="background-color: #111; color: #fff; text-align: center; font-family: sans-serif; padding: 20px;">
 
     <h2>مرحباً بك في تطبيق الأرباح 🚀</h2>
-    <p>شاهد الإعلان بالكامل لتجميع النقاط وزيادة رصيدك</p>
+    <p>اضغط على الزر بالأسفل لتشغيل الإعلان وتجميع الأرباح</p>
     
-    <!-- زرار تشغيل الإعلان -->
     <button id="adBtn" style="padding: 15px 30px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px;">
         📺 تشغيل الإعلان بمكافأة
     </button>
 
     <script>
-        // 1. دالة لجلب الـ Telegram ID من رابط الصفحة تلقائياً
+        // لقط الـ ID من الرابط
         function getTelegramId() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
         }
 
-        const userId = getTelegramId();
-        console.log("تم لقط الـ Telegram ID بنجاح:", userId);
+        const userId = getTelegramId() || "unknown";
 
-        // 2. عند الضغط على الزرار، يتم تمرير الـ ID لمونيتاج وتشغيل الإعلان
         document.getElementById('adBtn').addEventListener('click', () => {
-            if (!userId) {
-                alert("خطأ: لم يتم العثور على حساب التليجرام، افتح التطبيق من البوت مباشرة!");
-                return;
+            // التأكد من أن دالة مونيتاج موجودة وجاهزة للعمل
+            if (typeof show_11326679 === 'function') {
+                show_11326679({ var1: userId }).then(() => {
+                    console.log("Ad finished successfully");
+                }).catch((err) => {
+                    console.error("Monetag Error:", err);
+                    alert("برجاء المحاولة مرة أخرى");
+                });
+            } else {
+                // لو الدالة لسه محملتش، بنحاول نشغل الإعلان بالطريقة الاحتياطية
+                alert("جاري تجهيز الإعلان.. اضغط مرة أخرى خلال ثانيتين!");
+                window.location.reload(); // إعادة إنعاش الصفحة لتسريع تحميل الإعلان
             }
-
-            // تفعيل دالة مونيتاج وتمرير الـ ID في الـ var1 عشان يروح للـ Postback
-            show_11326679({ var1: userId }).then(() => {
-                alert('🎉 ممتاز! اكتمل الإعلان، انتظر ثواني لتحديث رصيدك في البوت.');
-            }).catch((err) => {
-                console.error("خطأ في تشغيل الإعلان:", err);
-                alert("برجاء المحاولة مرة أخرى أو تأكد من قفل مانع الإعلانات.");
-            });
         });
     </script>
 
