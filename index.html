@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق الأرباح</title>
-    <!-- كود مونيتاج الرئيسي -->
-    <script src="https://alwingulla.com/88/tag.min.js" data-zone="11326679" async data-standalone="true"></script>
 </head>
-<body style="background-color: #111; color: #fff; text-align: center; font-family: sans-serif; padding: 20px;">
+<body style="background-color: #111; color: #fff; text-align: center; font-family: sans-serif; padding: 20px; direction: rtl;">
 
     <h2>مرحباً بك في تطبيق الأرباح 🚀</h2>
-    <p>اضغط على الزر بالأسفل لتشغيل الإعلان وتجميع الأرباح</p>
+    <p>اضغط على الزر بالأسفل لتشغيل الإعلان وتجميع الأرباح فوراً</p>
     
-    <button id="adBtn" style="padding: 15px 30px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px;">
-        📺 تشغيل الإعلان بمكافأة
+    <button id="adBtn" style="padding: 15px 30px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; font-weight: bold;">
+        📺 تشغيل الإعلان المباشر
     </button>
 
     <script>
-        // لقط الـ ID من الرابط
+        // دالة لقط الـ Telegram ID من رابط الصفحة
         function getTelegramId() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
@@ -26,29 +24,12 @@
         const userId = getTelegramId() || "unknown";
 
         document.getElementById('adBtn').addEventListener('click', () => {
-            // 1. المحاولة الأولى: تشغيل الإعلان المعتاد عن طريق الدالة
-            if (typeof show_11326679 === 'function') {
-                show_11326679({ var1: userId }).then(() => {
-                    console.log("Ad finished successfully");
-                }).catch((err) => {
-                    console.error("Monetag Error:", err);
-                     فتح الاحتياطي لو الدالة فشلت
-                    fallbackToDirectLink();
-                });
-            } else {
-                // 2. المحاولة الثانية: لو الدالة لسه محملتش بسبب الكاش، افتح الإعلان فوراً بالطريقة الاحتياطية
-                fallbackToDirectLink();
-            }
-        });
-
-        // دالة تشغيل الإعلان الاحتياطية (حط رابط الـ Smart Link أو الـ Direct Link بتاعك من مونيتاج هنا)
-        function fallbackToDirectLink() {
-            // استبدل الرابط اللي تحت ده برابط الـ Direct Link الخاص بيك من حسابك في مونيتاج لو حابب
-            const directLinkUrl = `https://alwingulla.com/88/tag.min.js?zone=11326679&var1=${userId}`;
+            // الرابط بتاعك مدمج وجاهز ويمرر الـ ID في خانة var1
+            const myDirectLink = `https://omg10.com/4/11325608?var1=${userId}`;
             
-            // فتح الإعلان مباشرة
-            window.location.href = directLinkUrl;
-        }
+            // تحويل المستخدم للإعلان فوراً وبسرعة صاروخية
+            window.location.href = myDirectLink;
+        });
     </script>
 
 </body>
