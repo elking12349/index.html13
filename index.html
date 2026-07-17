@@ -26,20 +26,29 @@
         const userId = getTelegramId() || "unknown";
 
         document.getElementById('adBtn').addEventListener('click', () => {
-            // التأكد من أن دالة مونيتاج موجودة وجاهزة للعمل
+            // 1. المحاولة الأولى: تشغيل الإعلان المعتاد عن طريق الدالة
             if (typeof show_11326679 === 'function') {
                 show_11326679({ var1: userId }).then(() => {
                     console.log("Ad finished successfully");
                 }).catch((err) => {
                     console.error("Monetag Error:", err);
-                    alert("برجاء المحاولة مرة أخرى");
+                     فتح الاحتياطي لو الدالة فشلت
+                    fallbackToDirectLink();
                 });
             } else {
-                // لو الدالة لسه محملتش، بنحاول نشغل الإعلان بالطريقة الاحتياطية
-                alert("جاري تجهيز الإعلان.. اضغط مرة أخرى خلال ثانيتين!");
-                window.location.reload(); // إعادة إنعاش الصفحة لتسريع تحميل الإعلان
+                // 2. المحاولة الثانية: لو الدالة لسه محملتش بسبب الكاش، افتح الإعلان فوراً بالطريقة الاحتياطية
+                fallbackToDirectLink();
             }
         });
+
+        // دالة تشغيل الإعلان الاحتياطية (حط رابط الـ Smart Link أو الـ Direct Link بتاعك من مونيتاج هنا)
+        function fallbackToDirectLink() {
+            // استبدل الرابط اللي تحت ده برابط الـ Direct Link الخاص بيك من حسابك في مونيتاج لو حابب
+            const directLinkUrl = `https://alwingulla.com/88/tag.min.js?zone=11326679&var1=${userId}`;
+            
+            // فتح الإعلان مباشرة
+            window.location.href = directLinkUrl;
+        }
     </script>
 
 </body>
